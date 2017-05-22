@@ -156,6 +156,9 @@ ul {
   outline: none;
   padding: 0 20px;
 }
+.news_list--article .news_item {
+  margin-top: 0;
+}
 .news_item {
   background-color: #fff;
   margin-top: 15px;
@@ -311,6 +314,7 @@ ul {
   padding: 20px;
   margin-top: 20px;
   background-color: #fff;
+  width: 340px;
 }
 .hot_article_tab {
   height: 48px;
