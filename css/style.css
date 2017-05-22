@@ -17,7 +17,7 @@ i {
   padding: 0;
 }
 body {
-  font-family: "Microsoft YaHei";
+  font-family: arial, "Hiragino Sans GB", "Microsoft YaHei", Tahoma, Arial, Helvetica, STHeiti;
   font-size: 14px;
   color: #888;
   background-color: #fafafa;
@@ -27,7 +27,7 @@ a {
   text-decoration: none;
 }
 a:hover {
-  text-decoration: underline;
+  color: #fa9144;
 }
 ul {
   list-style: none;
@@ -42,10 +42,18 @@ ul {
 .bdt {
   border-top: 1px solid #ececec;
 }
+.header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9;
+}
 .container {
   position: relative;
   width: 1180px;
   margin: 0 auto;
+  padding-top: 135px;
   padding-bottom: 106px;
 }
 .main {
@@ -166,7 +174,7 @@ ul {
 .news_item .news_hd {
   display: block;
   position: relative;
-  height: 54px;
+  height: 40px;
   background: #f1f1f1;
   padding-left: 18px;
   padding-right: 15px;
@@ -175,13 +183,16 @@ ul {
 }
 .news_item .news_hd .news_hd_title {
   color: #fa9144;
-  line-height: 54px;
+  line-height: 40px;
+}
+.news_item .news_hd .news_hd_title:hover {
+  text-decoration: underline;
 }
 .news_item .news_hd .news_hd_icon {
   display: block;
   width: 24px;
   height: 18px;
-  margin-top: 18px;
+  margin-top: 13px;
   background: url('../images/icon-news.png') no-repeat;
   float: left;
   margin-right: 10px;
@@ -189,7 +200,7 @@ ul {
 .news_item .news_hd .news_hd_time {
   position: absolute;
   right: 15px;
-  top: 18px;
+  top: 11px;
 }
 .news_item .news_hd .news_hd_time .news_time_icon {
   margin-right: 10px;
@@ -210,8 +221,8 @@ ul {
   margin-top: 0;
 }
 .news_content {
-  margin-top: 30px;
   padding: 20px;
+  padding-top: 15px;
 }
 .news_content .news_title {
   font-size: 20px;
@@ -221,14 +232,13 @@ ul {
 }
 .news_content .news_time {
   color: #999;
-  line-height: 20px;
+  line-height: 27px;
 }
 .news_content .news_source {
   padding-right: 10px;
 }
 .news_content .news_details {
-  margin-top: 20px;
-  text-indent: 2em;
+  padding-top: 10px;
   line-height: 1.8;
 }
 .news_item--nopic .news_title {
@@ -239,7 +249,7 @@ ul {
   margin-right: 18px;
 }
 .news_item--onepic .news_content .news_time {
-  margin-top: 50px;
+  margin-top: 40px;
 }
 .news_item--threepic .news_pic_wrap {
   margin-top: 24px;
@@ -465,7 +475,6 @@ ul {
   line-height: 30px;
 }
 .position {
-  padding-top: 25px;
   padding-bottom: 16px;
 }
 .position .icon_position {

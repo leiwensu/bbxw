@@ -8,7 +8,7 @@ html,body,div,p,h1,h2,h3,h4,h5,h6,ul,li,a,span,i{
     padding: 0;
 }
 body{
-    font-family: "Microsoft YaHei";
+    font-family: arial, "Hiragino Sans GB", "Microsoft YaHei",Tahoma, Arial, Helvetica, STHeiti;
     font-size: 14px;
     color: #888;
     background-color: #fafafa;
@@ -18,7 +18,7 @@ a{
     text-decoration: none;
 }
 a:hover{
-    text-decoration: underline;
+    color: @base-color;
 }
 ul{
     list-style: none;
@@ -33,10 +33,18 @@ ul{
 .bdt{
     border-top: 1px solid #ececec;
 }
+.header{
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9;
+}
 .container{
     position: relative;
     width: @container-width;
     margin: 0 auto;
+    padding-top: 135px;
     padding-bottom: 106px;
 }
 .main{
@@ -159,7 +167,7 @@ ul{
     .news_hd{
         display: block;
         position: relative;
-        height: 54px;
+        height: 40px;
         background: #f1f1f1;
         padding-left: 18px;
         padding-right: 15px;
@@ -167,13 +175,16 @@ ul{
         color: @base-color;
         .news_hd_title{
             color: @base-color;
-            line-height: 54px;
+            line-height: 40px;
+            &:hover{
+                text-decoration: underline;
+            }
         }
         .news_hd_icon{
             display: block;
             width: 24px;
             height: 18px;
-            margin-top: 18px;
+            margin-top: 13px;
             background: url('../images/icon-news.png') no-repeat;
             float: left;
             margin-right: 10px;
@@ -181,7 +192,7 @@ ul{
         .news_hd_time{
             position: absolute;
             right: 15px;
-            top: 18px;
+            top: 11px;
             .news_time_icon{
                 margin-right: 10px;
                 float: left;
@@ -205,8 +216,8 @@ ul{
     margin-top: 0;
 }
 .news_content{
-    margin-top: 30px;
     padding: 20px;
+    padding-top: 15px;
     .news_title{
         font-size: @font20;
         color: @link-color;
@@ -215,14 +226,13 @@ ul{
     }
     .news_time{
         color: #999;
-        line-height: 20px;
+        line-height: 27px;
     }
     .news_source{
         padding-right: 10px;
     }
     .news_details{
-        margin-top: 20px;
-        text-indent: 2em;
+        padding-top: 10px;
         line-height: 1.8;
     }
 }
@@ -238,7 +248,7 @@ ul{
             margin-right: 18px;
         }
         .news_time{
-            margin-top: 50px;
+            margin-top: 40px;
         }
     }
 }
@@ -481,7 +491,6 @@ ul{
     }
 }
 .position{
-    padding-top: 25px;
     padding-bottom: 16px;
     .icon_position{
         float: left;

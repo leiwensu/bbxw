@@ -4,35 +4,34 @@
  */
 function sidebarFloat(){
     var $aside = $('#aside');//获取侧边栏
-    var asideH = $aside.height();//侧边栏的高度
+    var asideH = $aside.height() + $('.header').height();//侧边栏的高度
     var asideOffsetTop = $aside.offset().top;//获取侧边栏最底的图片到顶部的距离
 
     var $main = $('#main');//获取主栏目
     var mainOffsetTop = $main.offset().top;//主栏目距离顶部的距离
-    var mainH = $main.height();//主栏目高度
-
+    var mainH = $main.height() + $('.header').height();//主栏目高度
     var windowH = $(window).height();//可视区高度
+    console.log($('.header').height())
     var scrollTop = 0,
         t = 0;
 
     $(window).scroll(function(event) {
 
         scrollTop = $(document).scrollTop();//获取滚动条滚动的距离
-
+        console.log("scrollTop:" + scrollTop)
         if (mainH > asideH) {
-
             if (t <= scrollTop) { //下滚
-                if (asideOffsetTop + asideH <= windowH + scrollTop) {
+                if (asideH <= windowH + scrollTop) {
                     $('.sidebar').addClass('aside_fixed')
                 }
-                if (mainOffsetTop + mainH <= windowH + scrollTop) {
+                if (mainH <= windowH + scrollTop) {
                     $('.sidebar').removeClass('aside_fixed').addClass('aside_absolute')
                 }
             } else {//上滚
-                if ((mainOffsetTop + mainH > (windowH + scrollTop))) {
+                if ((mainH > (windowH + scrollTop))) {
                     $('.sidebar').removeClass('aside_absolute').addClass('aside_fixed')
                 }
-                if (scrollTop <= asideH + asideOffsetTop - windowH) {
+                if (scrollTop <= asideH - windowH) {
                     $('.sidebar').removeClass('aside_fixed')
                 }
             }
