@@ -1,6 +1,7 @@
+var sourceURL = 'http://192.168.24.81:8001';
 /**
  * 侧边栏悬浮效果处理
- * 
+ *
  */
 function sidebarFloat(){
     var $aside = $('#aside');//获取侧边栏
@@ -11,14 +12,11 @@ function sidebarFloat(){
     var mainOffsetTop = $main.offset().top;//主栏目距离顶部的距离
     var mainH = $main.height() + $('.header').height();//主栏目高度
     var windowH = $(window).height();//可视区高度
-    console.log($('.header').height())
     var scrollTop = 0,
         t = 0;
 
     $(window).scroll(function(event) {
-
         scrollTop = $(document).scrollTop();//获取滚动条滚动的距离
-        console.log("scrollTop:" + scrollTop)
         if (mainH > asideH) {
             if (t <= scrollTop) { //下滚
                 if (asideH <= windowH + scrollTop) {

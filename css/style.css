@@ -247,6 +247,11 @@ ul {
 .news_item--onepic .news_content .news_pic {
   float: left;
   margin-right: 18px;
+  width: 230px;
+  height: 153px;
+}
+.news_item--onepic .news_content .news_pic img {
+  width: 100%;
 }
 .news_item--onepic .news_content .news_time {
   margin-top: 40px;
@@ -257,6 +262,11 @@ ul {
 .news_item--threepic .news_pic {
   float: left;
   margin-right: 27px;
+  width: 230px;
+  height: 153px;
+}
+.news_item--threepic .news_pic img {
+  width: 100%;
 }
 .news_item--threepic .news_pic--0 {
   margin-right: 0;
