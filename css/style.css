@@ -201,6 +201,7 @@ ul {
   position: absolute;
   right: 15px;
   top: 11px;
+  line-height: 21px;
 }
 .news_item .news_hd .news_hd_time .news_time_icon {
   margin-right: 10px;
@@ -211,7 +212,6 @@ ul {
 }
 .news_item .news_hd .news_hd_time .news_time_text {
   position: relative;
-  top: -2px;
   color: #333;
 }
 .news_item .news_hd .news_hd_time .news_time_text--red {
@@ -249,6 +249,7 @@ ul {
   margin-right: 18px;
   width: 230px;
   height: 153px;
+  overflow: hidden;
 }
 .news_item--onepic .news_content .news_pic img {
   width: 100%;
@@ -282,6 +283,7 @@ ul {
   text-align: center;
   line-height: 44px;
   border-radius: 4px;
+  cursor: pointer;
 }
 .hot_title {
   font-size: 20px;
@@ -302,6 +304,7 @@ ul {
   text-align: right;
 }
 .hot_events {
+  margin-top: 15px;
   padding: 20px;
   background-color: #fff;
 }

@@ -29,13 +29,13 @@
                         <a href="newsList_events.html">24小时</a>
                     </li>
                     <li class="header_nav_item">
-                        <a href="javascript:;">娱乐事件</a>
+                        <a href="newsList_events.html">娱乐事件</a>
                     </li>
                     <li class="header_nav_item">
-                        <a href="javascript:;">国内外事件</a>
+                        <a href="newsList_events.html">国内外事件</a>
                     </li>
                     <li class="header_nav_item">
-                        <a href="javascript:;">全部事件</a>
+                        <a href="newsList_events.html">全部事件</a>
                     </li>
                 </ul>
                 <div class="header_search">
@@ -53,7 +53,7 @@
             <div class="news_list">
 
             </div>
-            <div class="news_more">更多 | MORE</div>
+            <div class="news_more" id="moreBtn">更多 | MORE</div>
         </div>
         <!-- 主要内容 end-->
         <!-- 侧边栏 start -->
@@ -203,27 +203,53 @@
     <script src="js/common.js"></script>
     <script>
     $(function() {
+        var page = 1;
+        fetchData(page);
+        $("#moreBtn").click(function(event) {
+            if(page<=totalPage){
+                page ++;
+                fetchData(page);
+            }else{
+                alert("已经是最后一页了！")
+            }
 
+        });
+        footerHover();//footer友情链接hover处理
+        // 热门文章 tab处理
+        $(".hot_article_tab").on('click', '.hot_tab_item', function() {
+            if ($(this).attr('id') == 0) {
+                //console.log(0)
+            } else if ($(this).attr('id') == 1) {
+                //console.log(1)
+            }
+            $(this).addClass('active').siblings('.hot_tab_item').removeClass('active');
+        })
+
+    })
+    function fetchData(page){
         $.ajax({
-            url: sourceURL+'/articleajax_page?page=1&am=10',
+            url: sourceURL+'/articleajax_page',
             type: 'GET',
             dataType: 'json',
-            data: {page: 1,am:10},
+            data: {page: page,am:10},
         })
         .done(function(res) {
             if(res.errmsg=="OK"){
+                window.totalPage = Math.ceil(res.article_total/10);
                 var list = res.article_list;
-                // var htmlStr = '';
-                console.log(list)
-
+                var htmlStr = '';
+                var isMt = '';
+                var isRed = '';
                 for(var i = 0; i < list.length; i++){
                     var imgStr = list[i].images;
 
+                    isRed = (list[i].publish=='刚刚'?'news_time_text--red':'')//判断如果是刚刚发布的新闻，则时间字体为红色
+
                     if(imgStr == ''){//0张
-                            var htmlStr = '<div class="news_item news_item--nopic news_item--0">'
+                            htmlStr += '<div class="news_item news_item--nopic '+isMt+'">'
                                     +'<a href="'+list[i].keywords_url+'" class="news_hd">'
                                         +'<p class="news_hd_title clearfix"><i class="news_hd_icon"></i>'+list[i].keywords+'</p>'
-                                        +'<p class="news_hd_time clearfix"><i class="news_time_icon"></i><span class="news_time_text news_time_text--red">'+list[i].publish+'</span></p>'
+                                        +'<p class="news_hd_time clearfix"><i class="news_time_icon"></i><span class="news_time_text '+isRed+'">'+list[i].publish+'</span></p>'
                                     +'</a>'
                                     +'<div class="news_content">'
                                         +'<div class="clearfix">'
@@ -233,15 +259,15 @@
                                        +' <p class="news_details">'+list[i].describe+'</p>'
                                    +'</div>'
                                 +'</div>';
-                                $('.news_list').append(htmlStr);
+
                     }else{//1张以上
                         var imgArr = imgStr.split('|');
                         var imgArrLength = imgArr.length;
                         if (imgArrLength == 1|| imgArrLength == 2) {//返回1张或者2张 只显示1张
-                            var htmlStr = '<div class="news_item news_item--onepic">'
+                             htmlStr += '<div class="news_item news_item--onepic '+isMt+'">'
                                          +'<a href="'+list[i].keywords_url+'" class="news_hd">'
                                             +'<p class="news_hd_title clearfix"><i class="news_hd_icon"></i>'+list[i].keywords+'</p>'
-                                            +'<p class="news_hd_time clearfix"><i class="news_time_icon"></i><span class="news_time_text">'+list[i].publish+'</span></p>'
+                                            +'<p class="news_hd_time clearfix"><i class="news_time_icon"></i><span class="news_time_text '+isRed+'">'+list[i].publish+'</span></p>'
                                        +'</a>'
                                        +'<div class="news_content">'
                                             +'<div class="clearfix">'
@@ -254,12 +280,12 @@
                                             +'</div>'
                                        +'</div>'
                                     +'</div>';
-                                    $('.news_list').append(htmlStr);
+
                         }else if(imgArrLength > 3 || imgArrLength == 3){//其他情况显示3张
-                            var htmlStr = '<div class="news_item news_item--threepic">'
+                           htmlStr += '<div class="news_item news_item--threepic '+isMt+'">'
                                         +'<a href="'+list[i].keywords_url+'" class="news_hd">'
                                             +'<p class="news_hd_title clearfix"><i class="news_hd_icon"></i>'+list[i].keywords+'</p>'
-                                            +'<p class="news_hd_time clearfix"><i class="news_time_icon"></i><span class="news_time_text">'+list[i].publish+'</span></p>'
+                                            +'<p class="news_hd_time clearfix"><i class="news_time_icon"></i><span class="news_time_text '+isRed+'">'+list[i].publish+'</span></p>'
                                         +'</a>'
                                         +'<div class="news_content">'
                                             +'<h2 class="news_title"><a href="'+list[i].article_url+'">'+list[i].title+'</a></h2>'
@@ -271,17 +297,18 @@
                                                     +'<img src="'+imgArr[1]+'" alt="">'
                                                 +'</div>'
                                                 +'<div class="news_pic news_pic--0">'
-                                                    +'<img src="'+imgArr[1]+'" alt="">'
+                                                    +'<img src="'+imgArr[2]+'" alt="">'
                                                 +'</div>'
                                             +'</div>'
                                             +'<div class="news_time"><span class="news_source">'+list[i].source_name+'</span><span>'+list[i].publish+'</span></div>'
                                         +'</div>'
                                    +'</div>';
-                                   $('.news_list').append(htmlStr);
+
                         }
                     }
                 }
-
+                $('.news_list').append(htmlStr);
+                //sidebarFloat();//侧边栏浮动
             }else{
                 alert('请求出错：',res.errmsg);
             }
@@ -289,32 +316,7 @@
         .fail(function() {
             alert('网络出错了！')
         });
-
-
-        sidebarFloat();//侧边栏浮动
-        footerHover();//footer友情链接hover处理
-        // 热门文章 tab处理
-        $(".hot_article_tab").on('click', '.hot_tab_item', function() {
-            if ($(this).attr('id') == 0) {
-                //console.log(0)
-            } else if ($(this).attr('id') == 1) {
-                //console.log(1)
-            }
-            $(this).addClass('active').siblings('.hot_tab_item').removeClass('active');
-        })
-
-        $("#searchIcon").mouseenter(function(event) {
-            $(this).hide();
-            $("#searchInput").show('3000');
-        })
-        $(document).bind("click",function(e){
-            if($(e.target).closest("#searchInput").length == 0){
-                $("#searchInput").hide('3000');
-                $("#searchIcon").show();
-            }
-        })
-
-    })
+    }
     </script>
 </body>
 

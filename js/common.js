@@ -1,4 +1,14 @@
-var sourceURL = 'http://192.168.24.81:8001';
+var sourceURL = 'http://192.168.24.154:8001';
+$("#searchIcon").mouseenter(function(event) {
+    $(this).hide();
+    $("#searchInput").show('3000');
+})
+$(document).bind("click",function(e){
+    if($(e.target).closest("#searchInput").length == 0){
+        $("#searchInput").hide('3000');
+        $("#searchIcon").show();
+    }
+})
 /**
  * 侧边栏悬浮效果处理
  *
@@ -14,7 +24,6 @@ function sidebarFloat(){
     var windowH = $(window).height();//可视区高度
     var scrollTop = 0,
         t = 0;
-
     $(window).scroll(function(event) {
         scrollTop = $(document).scrollTop();//获取滚动条滚动的距离
         if (mainH > asideH) {
